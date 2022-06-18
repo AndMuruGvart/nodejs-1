@@ -1,10 +1,10 @@
 import axios from 'axios';
-import https from 'https';
 import { getKeyValue, TOKEN_DICTIONARY } from './storage.service.js';
 
 
+
 const getWeather = async (city) => {
-    const token=getKeyValue(TOKEN_DICTIONARY.token);
+    const token = process.env.TOKEN ?? await getKeyValue(TOKEN_DICTIONARY.token);
     // const url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API}`;
     if (!token) {
         throw new Error('Не задан ключ API, задайте его через  команду -t [API_KEY]');
@@ -35,6 +35,7 @@ const getWeather = async (city) => {
     //     });
  
     // }); 
+    console.log(data);
     return data;
 }
 
